@@ -1,9 +1,6 @@
 //Global Variables
 //////////////////////////////////////////////////////////////////////////////////
-//array of words
 var words = ["canada", "toronto", "beaver", "hockey", "french", "poutine"];
-console.log(words[0]);
-//array of alphabet letters
 var letters = [
   "A",
   "B",
@@ -33,65 +30,82 @@ var letters = [
   "Z",
   "_"
 ];
-for (var i = 0; i < letters.length; i++) {
-  console.log(letters[i]);
-}
-//choose words randomly
-var random = Math.floor(Math.random() * words.length);
-var chosen = words[random];
-var wins = [];
-var loses = [];
-var underscore = [];
+// Random is a random number from 0 - number of words
+var random = 0;
+// Chosen is the word at that random position (like a random word :))
+var chosen = "";
+var wins = 0;
+var losses = 0;
+var guessed = "";
+//dom manipulation, this allows u to change stuff on the screen
+var wordHTML = document.getElementById("word");
+var winsHTML = document.getElementById("wins");
+var guessesHTML = document.getElementById("guesses");
 
-//dom manipulation
-var docUnderscore = document.getElementsbyClassName("underscore");
-var docWins = document.getElementsbyClassName("Wins");
+//Main////////////////////////////////////////////////////////////////////////////////
 
-//Main
-////////////////////////////////////////////////////////////////////////////////
+// This function starts off the game, it just selects a new word to play
+function start() {
+  // Reset the variables from previous games
+  random = Math.floor(Math.random() * words.length);
+  chosen = words[random];
+  guessed = "";
+  guessesHTML.innerHTML = "Guessed: " + guessed;
 
-//create underscores based on length of word
-let generateUnderscore = () => {
-  for (let i = 0; i < chosen.length; i++) {
-    underscore.push("_");
-    docUnderscore[0].innerHTML = underscore.join("");
+  var asterixedWord = "";
+
+  console.log("The word is :" + chosen);
+
+  // Iterates through the array of characters. Adds an asterix to asterixedWord each time.
+  for (var i = 0; i < chosen.length; i++) {
+    asterixedWord += "*";
   }
-  return underscore;
-};
+  // asterixedWord now has an asterix for each letter in the word
+  // This line sets the element with the id "word" to display the asterixs
+  wordHTML.innerHTML = asterixedWord;
+}
 
-//get users guess
+//Every time the user presses a key, this gets triggered
 document.addEventListener("keypress", event => {
-  var keyWord = String.fromCharCode(event.keyCode);
-  //if user wins
-  if (keyWord.indexOf(keyWord) > -1) {
-    //add wins to array
-    wins.push(keyWord);
+  // letter is your actual keyboard key
+  var letter = String.fromCharCode(event.keyCode);
+  if (!guessed.includes(letter)) {
+    // If the letter hasn't been guessed, add it to the guessed list
+    guessed += letter + " ";
+    // Add the letter to the screen
+    guessesHTML.innerHTML = "Guessed: " + guessed;
+    if (chosen.includes(letter)) {
+      // If the word has the letter, replace the asterix with the letter
+      var currentWord = wordHTML.innerHTML;
+      var newWord = "";
 
-    //replace underscore with right letter
-    underscore[chosen.indexOf(keyWord)] = keyWord;
-    docUnderscore[0].innerHTML = underscore.join(" ");
-    docWins[0].innerHTML = wins.join("");
-    //checks to see if user word matches guess
-    if (underscore.join("") == chosen) {
-      alert("you win");
+      // This iterates through each letter in the chosen word
+      // If the letter matches the guessed letter, stick the letter into the new word
+      // Otherwise, use what was already there
+      for (var i = 0; i < currentWord.length; i++) {
+        if (chosen[i] == letter) {
+          newWord += letter;
+        } else {
+          newWord += currentWord[i];
+        }
+      }
+      wordHTML.innerHTML = newWord;
+
+      if (!newWord.includes("*")) {
+        // Player won! No more asterixs!
+        // Add 1 to number of wins
+        wins += 1;
+        winsHTML.innerHTML = "Wins: " + wins;
+        // This starts a new game
+        start();
+      }
     }
   } else {
-    loses.push(keyWord);
-    docLoses[0].innerHTML = loses;
+    // Otherwise, if the letter has been guessed, do nothing
+    // Return ends the function, nothing else will be called
+    return;
   }
 });
 
-underscore();
-//from the tutoring session
-console.log(generateUnderscore());
-var split = chosen.split("");
-console.log(split);
-
-function start() {
-  var wordView = "";
-  for (var i = 0; i < split.length; i++) {
-    wordView += "_ ";
-  }
-  document.getElementById("word").innerHTML = wordView;
-}
+// Calling start actually starts everything
 start();
