@@ -2,6 +2,7 @@
   background-color: white;
   width: 65%;
   text-align: center;
+  margin: 12px auto;
 }
 
 body {
@@ -14,8 +15,8 @@ header {
   border: 3px solid red;
   font-size: 20px;
   text-align: center;
-  margin: 15 px auto;
-  height: 150 px;
+  margin: 0 auto;
+  height: 150px;
   width: 100%;
 }
 #word {
@@ -28,6 +29,15 @@ header {
 }
 
 #guesses {
+  border: 3px solid red;
+  font-size: 20px;
+  text-align: center;
+  margin: 0 auto;
+  height: 100px;
+  width: 100%;
+}
+
+#guessesLeft {
   border: 3px solid red;
   font-size: 20px;
   text-align: center;

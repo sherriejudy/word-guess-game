@@ -41,6 +41,20 @@ var guessed = "";
 var wordHTML = document.getElementById("word");
 var winsHTML = document.getElementById("wins");
 var guessesHTML = document.getElementById("guesses");
+var showLives = document.getElementById("mylives");
+
+// Show lives
+comments = function() {
+  showLives.innerHTML = "You have " + Guesses + " lives";
+  if (wins < 1) {
+    showLives.innerHTML = "Game Over";
+  }
+  for (var i = 0; i < guessed.length; i++) {
+    if (counter + space === guessed.length) {
+      showLives.innerHTML = "You Win!";
+    }
+  }
+};
 
 //Main////////////////////////////////////////////////////////////////////////////////
 
@@ -95,6 +109,7 @@ document.addEventListener("keypress", event => {
         // Player won! No more asterixs!
         // Add 1 to number of wins
         wins += 1;
+        lives -= 1;
         winsHTML.innerHTML = "Wins: " + wins;
         // This starts a new game
         start();
