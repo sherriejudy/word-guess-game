@@ -36,22 +36,23 @@ var random = 0;
 var chosen = "";
 var wins = 0;
 var losses = 0;
+var lives = 10;
 var guessed = "";
 //dom manipulation, this allows u to change stuff on the screen
 var wordHTML = document.getElementById("word");
 var winsHTML = document.getElementById("wins");
 var guessesHTML = document.getElementById("guesses");
-var showLives = document.getElementById("mylives");
+var myLivesHTML = document.getElementById("mylives");
 
 // Show lives
 comments = function() {
-  showLives.innerHTML = "You have " + Guesses + " lives";
+  myLives.innerHTML = "You have " + Guesses + " lives";
   if (wins < 1) {
-    showLives.innerHTML = "Game Over";
+    myLives.innerHTML = "Game Over";
   }
   for (var i = 0; i < guessed.length; i++) {
     if (counter + space === guessed.length) {
-      showLives.innerHTML = "You Win!";
+      myLives.innerHTML = "You Win!";
     }
   }
 };
@@ -111,6 +112,7 @@ document.addEventListener("keypress", event => {
         wins += 1;
         lives -= 1;
         winsHTML.innerHTML = "Wins: " + wins;
+        myLivesHTML.innerHTML = "Lives" - lives;
         // This starts a new game
         start();
       }
