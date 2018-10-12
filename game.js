@@ -59,7 +59,7 @@ function start() {
   chosen = words[random];
   guessed = "";
   guessesHTML.innerHTML = "Guessed: " + guessed;
-  myLives = 10;
+  lives = 10;
   myLivesHTML.innerHTML = "You have " + lives + " lives";
 
   var asterixedWord = "";
