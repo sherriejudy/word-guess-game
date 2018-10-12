@@ -46,15 +46,7 @@ var myLivesHTML = document.getElementById("mylives");
 
 // Show lives
 comments = function() {
-  myLives.innerHTML = "You have " + Guesses + " lives";
-  if (wins < 1) {
-    myLives.innerHTML = "Game Over";
-  }
-  for (var i = 0; i < guessed.length; i++) {
-    if (counter + space === guessed.length) {
-      myLives.innerHTML = "You Win!";
-    }
-  }
+  myLives.innerHTML = "You have " + lives + " lives";
 };
 
 //Main////////////////////////////////////////////////////////////////////////////////
@@ -82,6 +74,7 @@ function start() {
 
 //Every time the user presses a key, this gets triggered
 document.addEventListener("keypress", event => {
+  lives -= 1;
   // letter is your actual keyboard key
   var letter = String.fromCharCode(event.keyCode);
   if (!guessed.includes(letter)) {
