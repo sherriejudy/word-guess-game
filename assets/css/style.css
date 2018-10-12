@@ -1,3 +1,55 @@
 .container {
-  background-color: red;
+  background-color: white;
+  width: 65%;
+  text-align: center;
+}
+
+body {
+  background-image: url("../images/background.jpg");
+  background-position: center;
+  background-repeat: repeat;
+}
+
+header {
+  border: 3px solid red;
+  font-size: 20px;
+  text-align: center;
+  margin: 15 px auto;
+  height: 150 px;
+  width: 100%;
+}
+#word {
+  border: 3px solid red;
+  font-size: 20px;
+  text-align: center;
+  margin: 0 auto;
+  height: 50px;
+  width: 100%;
+}
+
+#guesses {
+  border: 3px solid red;
+  font-size: 20px;
+  text-align: center;
+  margin: 0 auto;
+  height: 100px;
+  width: 100%;
+}
+
+#wins {
+  border: 3px solid red;
+  font-size: 20px;
+  text-align: center;
+  margin: 0 auto;
+  height: 100px;
+  width: 100%;
+}
+
+#losses {
+  border: 3px solid red;
+  font-size: 20px;
+  text-align: center;
+  margin: 0 auto;
+  height: 100px;
+  width: 100%;
 }
