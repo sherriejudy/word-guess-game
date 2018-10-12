@@ -43,10 +43,11 @@ var wordHTML = document.getElementById("word");
 var winsHTML = document.getElementById("wins");
 var guessesHTML = document.getElementById("guesses");
 var myLivesHTML = document.getElementById("mylives");
+var lossesHTML = document.getElementById("losses");
 
 // Show lives
 comments = function() {
-  myLives.innerHTML = "You have " + lives + " lives";
+  myLivesHTML.innerHTML = "You have " + lives + " lives";
 };
 
 //Main////////////////////////////////////////////////////////////////////////////////
@@ -58,6 +59,8 @@ function start() {
   chosen = words[random];
   guessed = "";
   guessesHTML.innerHTML = "Guessed: " + guessed;
+  myLives = 10;
+  myLivesHTML.innerHTML = "You have " + lives + " lives";
 
   var asterixedWord = "";
 
@@ -75,6 +78,12 @@ function start() {
 //Every time the user presses a key, this gets triggered
 document.addEventListener("keypress", event => {
   lives -= 1;
+  myLivesHTML.innerHTML = "You have " + lives + " lives";
+  if (lives < 1) {
+    losses += 1;
+    lossesHTML.innerHTML = "Losses:" + losses;
+    start();
+  }
   // letter is your actual keyboard key
   var letter = String.fromCharCode(event.keyCode);
   if (!guessed.includes(letter)) {
@@ -103,9 +112,7 @@ document.addEventListener("keypress", event => {
         // Player won! No more asterixs!
         // Add 1 to number of wins
         wins += 1;
-        lives -= 1;
         winsHTML.innerHTML = "Wins: " + wins;
-        myLivesHTML.innerHTML = "Lives" - lives;
         // This starts a new game
         start();
       }
